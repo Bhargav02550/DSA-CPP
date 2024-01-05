@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+   int n;
+   cin>>n;
+   int arr[n];
+   for(int i=0;i<n;i++){
+       cin>>arr[i];
+   }
+   int l,r;
+   int c=0;
+   cin>>l>>r;
+   int bitarr[n][32];
+   for(int i=0;i<32;i++){
+       for(int j=0;j<n;j++){
+           if((arr[j])&(1<<i))c++;
+           bitarr[j][i]=c;
+       }
+       c=0;
+   }
+   int ans=0;
+   int dif=(r-l)+1;
+   for(int i=0;i<32;i++){
+       if((l==0) and (bitarr[r][i])>=(dif)){
+           ans|=(1<<i);
+       }
+       else if(((bitarr[r][i])-(bitarr[l-1][i]))>=dif){
+           ans|=(1<<i);
+       }
+   }
+   cout<<ans;
+}
